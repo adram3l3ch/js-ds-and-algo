@@ -11,13 +11,12 @@ export class LinkedList<T extends Array<V>, V> {
    size = 0;
 
    constructor(...values: T) {
-      if (!values.length) return;
-      let current: Node<T, V> | null = null;
+      let prev: Node<T, V> | null = null;
       for (const index in values) {
          const node = new Node(values[index]);
          if (index === "0") this.#head = node;
-         else current!.next = node;
-         current = node;
+         else prev!.next = node;
+         prev = node;
       }
       this.size = values.length;
    }
