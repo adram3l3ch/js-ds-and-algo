@@ -16,18 +16,18 @@ class TreeNode {
 }
 
 export class BinarySearchTree {
-   root: TreeNode | null = null;
+   #root: TreeNode | null = null;
    constructor() {}
 
    isEmpty() {
-      return this.root === null;
+      return this.#root === null;
    }
 
    insert(value: number) {
       const newNode = new TreeNode(value);
-      if (this.isEmpty()) this.root = newNode;
+      if (this.isEmpty()) this.#root = newNode;
       else {
-         this.#insertNode(this.root!, newNode);
+         this.#insertNode(this.#root!, newNode);
       }
    }
 
@@ -43,7 +43,7 @@ export class BinarySearchTree {
    }
 
    search(value: number) {
-      let current = this.root;
+      let current = this.#root;
       while (current) {
          if (value === current.value) return { found: true, node: current };
          else if (value < current.value) current = current.left;
@@ -52,21 +52,21 @@ export class BinarySearchTree {
       return { found: false, node: null };
    }
 
-   preOrderDfs(node = this.root) {
+   preOrderDfs(node = this.#root) {
       if (!node) return;
       console.log(node.value);
       this.preOrderDfs(node.left);
       this.preOrderDfs(node.right);
    }
 
-   inOrderDfs(node = this.root) {
+   inOrderDfs(node = this.#root) {
       if (!node) return;
       this.inOrderDfs(node.left);
       console.log(node.value);
       this.inOrderDfs(node.right);
    }
 
-   postOrderDfs(node = this.root) {
+   postOrderDfs(node = this.#root) {
       if (!node) return;
       this.postOrderDfs(node.left);
       this.postOrderDfs(node.right);
@@ -76,7 +76,7 @@ export class BinarySearchTree {
    bfs() {
       if (this.isEmpty()) return;
       const queue = new Queue<TreeNode>();
-      queue.enqueue(this.root!);
+      queue.enqueue(this.#root!);
       this.#levelOrder(queue);
    }
 
@@ -91,7 +91,7 @@ export class BinarySearchTree {
 
    findMin(root?: TreeNode) {
       if (this.isEmpty()) return null;
-      let current = root || this.root;
+      let current = root || this.#root;
       while (current) {
          if (!current.left) return current.value;
          current = current.left;
@@ -100,7 +100,7 @@ export class BinarySearchTree {
 
    findMax(root?: TreeNode) {
       if (this.isEmpty()) return null;
-      let current = root || this.root;
+      let current = root || this.#root;
       while (current) {
          if (!current.right) return current.value;
          current = current.right;
@@ -108,7 +108,7 @@ export class BinarySearchTree {
    }
 
    delete(value: number) {
-      this.root = this.#deleteNode(this.root, value) || null;
+      this.#root = this.#deleteNode(this.#root, value) || null;
    }
 
    #deleteNode(root: TreeNode | null, value: number) {
@@ -127,7 +127,7 @@ export class BinarySearchTree {
       return root;
    }
 
-   reverse(root = this.root) {
+   reverse(root = this.#root) {
       if (root === null) return;
       [root.left, root.right] = [root.right, root.left];
       this.reverse(root.left);
