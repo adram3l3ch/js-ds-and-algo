@@ -6,7 +6,7 @@
    "scripts": {
       "start": "node ./dist/index.js",
       "build": "npx tsc",
-      "dev": "nodemon ./src/index.ts",
+      "dev": "tsx watch ./src/index.ts",
       "watch": "npx tsc --watch",
       "test": "echo \"Error: no test specified\" && exit 1"
    },
@@ -18,7 +18,7 @@
       "typescript": "^5.7.3"
    },
    "devDependencies": {
-      "nodemon": "^3.1.9",
-      "ts-node": "^10.9.2"
+      "tsc": "^2.0.4",
+      "tsx": "^4.23.15"
    }
 }
